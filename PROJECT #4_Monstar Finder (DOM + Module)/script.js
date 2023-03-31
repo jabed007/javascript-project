@@ -1,28 +1,27 @@
 // I wish you good luck and happy coding 🥰🤠🥳🥳💯💯
 
-const createMonster = function () {
-  const monster = document.createElement("div");
-  monster.className = "monster";
+import { monsters } from "./monsters.js";
+
+for (const monster of monsters) {
+  const monsterDiv = document.createElement("div");
+  monsterDiv.className = "monster";
 
   const img = document.createElement("img");
-  img.src = "https://robohash.org/6?set=set2";
-  img.alt = "Md. Jabed Hossan";
+  img.src = `https://robohash.org/${monster.id}?set=set2`;
+  img.alt = `${monster.name}`;
 
   const p1 = document.createElement("p");
   p1.className = "name";
-  p1.innerText = "Md. Jabed Hossain";
+  p1.innerText = `${monster.name}`;
 
   const p2 = document.createElement("p");
   p2.className = "email";
-  p2.innerText = "jabed.cse.21@gmail.com";
+  p2.innerText = `${monster.email}`;
 
-  monster.append(img, p1, p2);
-  //console.log(monster);
+  monsterDiv.append(img, p1, p2);
 
-  document.querySelector(".monsters").append(monster);
-};
-
-createMonster();
+  document.querySelector(".monsters").append(monsterDiv);
+}
 
 const createNotFound = function () {
   const notFound = document.createElement("div");
