@@ -2,7 +2,7 @@
 
 import { monsters } from "./monsters.js";
 
-for (const monster of monsters) {
+const createMonster = function (monster) {
   const monsterDiv = document.createElement("div");
   monsterDiv.className = "monster";
 
@@ -21,6 +21,10 @@ for (const monster of monsters) {
   monsterDiv.append(img, p1, p2);
 
   document.querySelector(".monsters").append(monsterDiv);
+};
+
+for (const monster of monsters) {
+  createMonster(monster);
 }
 
 const createNotFound = function () {
@@ -39,4 +43,23 @@ const createNotFound = function () {
   document.querySelector(".monsters").append(notFound);
 };
 
-createNotFound();
+document
+  .querySelector("#search-monster")
+  .addEventListener("keyup", function (e) {
+    const keyword = e.target.value.toLowerCase();
+    // console.log(keyword);
+    const monsterAll = document.querySelectorAll(".monster");
+    //console.log(monsterAll);
+    let notFound = false;
+    for (const monster of monsterAll) {
+      // console.log(monster);
+      const name = monster.children[1].innerText.toLowerCase();
+      const email = monster.children[2].innerText.toLowerCase();
+      // console.log(name, email);
+      if (name.includes(keyword) || email.includes(keyword)) {
+        monster.style.display = "block";
+      } else {
+        monster.style.display = "none";
+      }
+    }
+  });
