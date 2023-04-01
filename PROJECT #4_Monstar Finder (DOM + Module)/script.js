@@ -43,6 +43,8 @@ const createNotFound = function () {
   document.querySelector(".monsters").append(notFound);
 };
 
+createNotFound();
+
 document
   .querySelector("#search-monster")
   .addEventListener("keyup", function (e) {
@@ -50,7 +52,7 @@ document
     // console.log(keyword);
     const monsterAll = document.querySelectorAll(".monster");
     //console.log(monsterAll);
-    let notFound = false;
+    let notFound = true;
     for (const monster of monsterAll) {
       // console.log(monster);
       const name = monster.children[1].innerText.toLowerCase();
@@ -58,8 +60,21 @@ document
       // console.log(name, email);
       if (name.includes(keyword) || email.includes(keyword)) {
         monster.style.display = "block";
+        notFound = false;
       } else {
         monster.style.display = "none";
       }
+
+      if (notFound) {
+        document.querySelector(".not-found").style.display = "block";
+      } else {
+        document.querySelector(".not-found").style.display = "none";
+      }
     }
+  });
+
+document
+  .querySelector("#search-monster-form")
+  .addEventListener("submit", (e) => {
+    e.preventDefault();
   });
