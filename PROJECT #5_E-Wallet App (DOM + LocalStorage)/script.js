@@ -16,6 +16,7 @@ document
   });
 
 function createNewItem(type, desc, value) {
+  const time = getFormattedTime();
   const newHtml = `
     <div class="item">
       <div class="item-description-time">
@@ -23,7 +24,7 @@ function createNewItem(type, desc, value) {
           <p>${desc}</p>
         </div>
         <div class="item-time">
-          <p>25 Feb, 06:45 PM</p>
+          <p>${time}</p>
         </div>
       </div>
       <div class="item-amount ${
@@ -47,9 +48,18 @@ function resetForm() {
 
 /* Utility Function */
 
-function formattedTime() {
-  let now = new Date();
-  console.log(now);
-}
+// 25 Feb, 06:45 PM
 
-formattedTime();
+function getFormattedTime() {
+  const now = new Date().toLocaleTimeString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const date = now.split(",")[0].split(" ");
+  const time = now.split(",")[1];
+
+  return `${date[1]} ${date[0]} ${time}`;
+}
